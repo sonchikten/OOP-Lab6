@@ -1,6 +1,6 @@
 #include "battle_visitor.h"
 
-bool BattleVisitor::visit(Elf& defender, std::shared_ptr<NPC> attacker) { //true если атакующий нападает на эльфа
+bool BattleVisitor::visit(Elf& defender, std::shared_ptr<NPC> attacker) { //true если атакующий убивает эльфа
     if (attacker->is_knight()) { // эльф убивает рыцаря → атакующий рыцарь проигрывает
         return false;
     } else if (attacker->is_bandit()) { // разбойник убивает эльфа → атакующий разбойник побеждает

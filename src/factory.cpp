@@ -13,7 +13,7 @@ std::shared_ptr<NPC> factory(std::istream &is) {
     if (is >> type) {
         switch (type) {
         case ElfType:
-            result = std::make_shared<Elf>(is);
+            result = std::make_shared<Elf>(is); //выделяет память, вызывает конструктор и создает shared_ptr, который управляет этим объектом
             break;
         case KnightType:
             result = std::make_shared<Knight>(is);
@@ -45,11 +45,6 @@ std::shared_ptr<NPC> factory(NpcType type, const std::string& name, int x, int y
     default:
         std::cerr << "unknown NPC type: " << type << std::endl;
     }
-
-    if (result) {
-        result->subscribe(std::make_shared<TextObserver>());
-    }
-    
     return result;
 }
 
@@ -71,13 +66,12 @@ void save(const set_t &array, const std::string &filename) {
 set_t load(const std::string &filename) {
     set_t result;
     std::ifstream is(filename);
-    if (is.good() && is.is_open()) {
+    if (is.good() && is.is_open()) { //если поток в хорошем состоянии и файл открыт
         int count;
         is >> count;  
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < count; i++) {
             auto npc = factory(is);
             if (npc) {
-                npc->subscribe(std::make_shared<TextObserver>());
                 result.insert(npc);
             }
         }

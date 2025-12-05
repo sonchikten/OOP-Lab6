@@ -1,17 +1,11 @@
 #include "npc.h"
 
-NPC::NPC(NpcType t, const std::string& n, int _x, int _y) : type(t), name(n), x(_x), y(_y) {
-    if (x <= 0 || x > 500) x = 250;
-    if (y <= 0 || y > 500) y = 250;
-}
+NPC::NPC(NpcType t, const std::string& n, int _x, int _y) : type(t), name(n), x(_x), y(_y) {}
 
 NPC::NPC(NpcType t, std::istream &is) : type(t) {
     is >> name;
     is >> x;  
     is >> y;   
-
-    if (x <= 0 || x > 500) x = 250;
-    if (y <= 0 || y > 500) y = 250;
 }
 
 void NPC::subscribe(std::shared_ptr<IFightObserver> observer) {
@@ -19,8 +13,9 @@ void NPC::subscribe(std::shared_ptr<IFightObserver> observer) {
 }
 
 void NPC::fight_notify(const std::shared_ptr<NPC> defender, bool win) {
-    for (auto &o : observers)
+    for (auto &o : observers) {
         o->on_fight(shared_from_this(), defender, win); //shared_from_this() создает shared_ptr на текущий объект this
+    }
 }
 
 bool NPC::is_close(const std::shared_ptr<NPC> &other, size_t distance) const {

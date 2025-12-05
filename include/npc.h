@@ -45,7 +45,7 @@ struct NPC : public std::enable_shared_from_this<NPC> { //позволяет с�
     
     virtual ~NPC() = default;
     
-    void subscribe(std::shared_ptr<IFightObserver> observer); //добавляем нового наблюдател
+    void subscribe(std::shared_ptr<IFightObserver> observer); //добавляем нового наблюдателя
     void fight_notify(const std::shared_ptr<NPC> defender, bool win);
     
     virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance) const;
@@ -58,6 +58,9 @@ struct NPC : public std::enable_shared_from_this<NPC> { //позволяет с�
     
     virtual void print() = 0;
     virtual void save(std::ostream &os);
+
+    int get_x() const { return x; }
+    int get_y() const { return y; }
 
     const std::string& get_name() const { return name; }
     NpcType get_type() const { return type; }

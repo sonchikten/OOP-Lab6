@@ -8,9 +8,9 @@ set_t fight(const set_t &array, size_t distance) {
     set_t dead_list;
     BattleVisitor visitor;
     
-    std::vector<std::pair<std::shared_ptr<NPC>, std::shared_ptr<NPC>>> battles;
+    std::vector<std::pair<std::shared_ptr<NPC>, std::shared_ptr<NPC>>> battles; 
     
-    for (const auto &attacker : array) {
+    for (const auto &attacker : array) { 
         for (const auto &defender : array) {
             if (attacker == defender) continue;
             
@@ -36,9 +36,9 @@ set_t fight(const set_t &array, size_t distance) {
             continue;
         }
         
-        bool attacker_won = defender->accept(visitor, attacker);
+        bool attacker_won = defender->accept(visitor, attacker); //у защитника вызывается visitor
         
-        if (attacker->get_type() == defender->get_type()) {
+        if (attacker->get_type() == defender->get_type()) { //если типы npc одинаковые - погибают оба
             dead_list.insert(attacker);
             dead_list.insert(defender);
             

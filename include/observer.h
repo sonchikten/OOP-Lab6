@@ -48,8 +48,7 @@ public:
                 log_file << attacker->get_name() << " killed " 
                          << defender->get_name() << std::endl;
             } else {
-                log_file << "Mutual destruction: " << attacker->get_name() 
-                         << " and " << defender->get_name() << " both died" << std::endl;
+                log_file << "Mutual destruction: " << attacker->get_name() << " and " << defender->get_name() << " both died" << std::endl;
             }
         }
     }
